@@ -112,6 +112,11 @@ php artisan schedule:work
 - Meta tags و Open Graph عبر مكوّن `seo-meta`
 - صفحات المسارات: عنوان/وصف/كلمات مفتاحية + JSON-LD (`Course`)
 - صفحات الدروس: وصف + JSON-LD (`LearningResource`)
+- صفحات اللايفات والاشتراكات: صفحات هبوط عامة + JSON-LD (`Event` / `Product`)
+- المدونة: `/blog` + مقالات + JSON-LD (`Article`)
+- الصفحة الرئيسية: `Organization` + `WebSite`
+- Google Analytics 4 عبر `GA4_MEASUREMENT_ID`
+- `noindex` تلقائي لصفحات الدخول والدفع والإدارة
 - خريطة الموقع: `/sitemap.xml`
 - `robots.txt` يشير إلى Sitemap
 

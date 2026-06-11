@@ -4,6 +4,7 @@
     'image' => null,
     'type' => 'website',
     'canonical' => null,
+    'robots' => null,
 ])
 
 @php
@@ -11,10 +12,14 @@
     $pageTitle = $title ? $title . ' | ' . $siteName : $siteName;
     $metaDescription = $description ?? 'منصة تعليمية عربية لتطوير المصورين مع أحمد زغلول: مسارات، دروس، لايفات، ومجتمع تطبيقي.';
     $canonicalUrl = $canonical ?? url()->current();
+    $metaImage = $image ?: config('seo.default_og_image');
 @endphp
 
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $metaDescription }}">
+@if ($robots)
+    <meta name="robots" content="{{ $robots }}">
+@endif
 <link rel="canonical" href="{{ $canonicalUrl }}">
 <meta property="og:locale" content="ar_SA">
 <meta property="og:type" content="{{ $type }}">
@@ -22,9 +27,9 @@
 <meta property="og:description" content="{{ $metaDescription }}">
 <meta property="og:url" content="{{ $canonicalUrl }}">
 <meta property="og:site_name" content="{{ $siteName }}">
-@if ($image)
-    <meta property="og:image" content="{{ $image }}">
-    <meta name="twitter:image" content="{{ $image }}">
+@if ($metaImage)
+    <meta property="og:image" content="{{ $metaImage }}">
+    <meta name="twitter:image" content="{{ $metaImage }}">
 @endif
 
 <meta name="twitter:card" content="summary_large_image">

@@ -32,6 +32,8 @@
                         <textarea class="form-control" id="description" name="description" rows="4">{{ old('description', $event->description) }}</textarea>
                     </div>
 
+                    <x-admin-seo-fields :model="$event" />
+
                     <x-media-field
                         label="صورة الغلاف"
                         name="cover_image"

@@ -6,6 +6,7 @@ use App\Enums\AccessLevel;
 use App\Enums\SkillLevel;
 use App\Models\LearningPath;
 use App\Models\Lesson;
+use App\Models\BlogPost;
 use App\Models\LiveEvent;
 use App\Models\SubscriptionPlan;
 use Illuminate\Database\Seeder;
@@ -98,9 +99,26 @@ class PlatformSeeder extends Seeder
             [
                 'title' => 'لايف تعريفي: كيف تبدأ رحلتك في التصوير',
                 'description' => 'جلسة تعريفية عن طريقة التعلم داخل المنصة.',
+                'seo_description' => 'لايف مجاني تعريفي يشرح كيف تبدأ رحلتك في التصوير داخل بيت المصور.',
+                'seo_keywords' => 'لايف تصوير,تعليم تصوير,بيت المصور',
                 'location' => 'اونلاين',
+                'starts_at' => now()->addDays(7),
                 'capacity' => 100,
                 'access_level' => AccessLevel::Free,
+                'is_published' => true,
+            ],
+        );
+
+        BlogPost::updateOrCreate(
+            ['slug' => 'photography-basics-guide'],
+            [
+                'title' => 'دليل المبتدئين: كيف تبدأ في التصوير الفوتوغرافي',
+                'excerpt' => 'خطوات عملية لفهم الكاميرا والتعريض والتكوين قبل الانتقال للمحتوى المتقدم.',
+                'body' => "ابدأ بفهم ثلاثة عناصر أساسية: التعريض، العدسة، والتكوين.\n\nالتعريض يتحكم في كمية الضوء التي تصل للحساس. العدسة تحدد زاوية الرؤية وعزل الخلفية. التكوين يحدد أين يجلس المشاهد داخل الصورة.\n\nفي بيت المصور نربط هذه المفاهيم بمسارات عملية وتحديات أسبوعية داخل المجتمع.",
+                'seo_description' => 'دليل عربي للمبتدئين يشرح أساسيات التصوير الفوتوغرافي بخطوات عملية.',
+                'seo_keywords' => 'تصوير فوتوغرافي,مبتدئين,تعليم تصوير',
+                'author_name' => 'أحمد زغلول',
+                'published_at' => now()->subDay(),
                 'is_published' => true,
             ],
         );

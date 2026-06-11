@@ -5,12 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        @php
+            $defaultRobots = request()->routeIs(
+                'dashboard',
+                'dashboard.avatar.update',
+                'notifications.*',
+                'subscription-plans.checkout',
+                'subscription-plans.checkout.store',
+                'subscription-orders.show',
+                'login',
+                'login.store',
+                'register',
+                'register.store',
+                'admin.*',
+            ) ? 'noindex, nofollow' : null;
+        @endphp
+
         <x-seo-meta
             :title="trim($__env->yieldContent('title')) ?: null"
             :description="trim($__env->yieldContent('meta_description')) ?: null"
             :canonical="trim($__env->yieldContent('canonical')) ?: null"
             :image="trim($__env->yieldContent('meta_image')) ?: null"
+            :type="trim($__env->yieldContent('meta_type')) ?: 'website'"
+            :robots="trim($__env->yieldContent('robots')) ?: $defaultRobots"
         />
+
+        <x-google-analytics />
 
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.rtl.min.css') }}">
         @stack('head')
@@ -31,6 +51,7 @@
                     <a href="{{ route('learning-paths.index') }}" class="text-reset">المسارات</a>
                     <a href="{{ route('community.index') }}" class="text-reset">المجتمع</a>
                     <a href="{{ route('live-events.index') }}" class="text-reset">اللايفات</a>
+                    <a href="{{ route('blog.index') }}" class="text-reset">المدونة</a>
                     <a href="{{ route('subscription-plans.index') }}" class="text-reset">الاشتراكات</a>
                 </div>
 
@@ -78,6 +99,7 @@
                 <a class="btn btn-soft justify-content-start" href="{{ route('learning-paths.index') }}">المسارات</a>
                 <a class="btn btn-soft justify-content-start" href="{{ route('community.index') }}">المجتمع</a>
                 <a class="btn btn-soft justify-content-start" href="{{ route('live-events.index') }}">اللايفات</a>
+                <a class="btn btn-soft justify-content-start" href="{{ route('blog.index') }}">المدونة</a>
                 <a class="btn btn-soft justify-content-start" href="{{ route('subscription-plans.index') }}">الاشتراكات</a>
 
                 <div class="border-top my-2"></div>

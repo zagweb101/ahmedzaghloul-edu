@@ -13,22 +13,21 @@ class LiveEventController extends Controller
 {
     public function index(Request $request): View
     {
-        $eventsQuery = LiveEvent::query()
-            ->withCount(['registrations' => fn ($query) => $query->where('status', 'registered')])
-            ->where('is_published', true)
-            ->orderByRaw('starts_at is null')
-            ->orderBy('starts_at');
-
-        if ($request->user()) {
-            $eventsQuery->withExists([
-                'registrations as registered_by_current_user' => fn ($query) => $query
-                    ->where('user_id', $request->user()->id)
-                    ->where('status', 'registered'),
-            ]);
-        }
-
         return view('live-events.index', [
-            'events' => $eventsQuery->get(),
+            'events' => $this->publishedEventsQuery($request)->get(),
+        ]);
+    }
+
+    public function show(Request $request, LiveEvent $liveEvent): View
+    {
+        abort_unless($liveEvent->is_published, 404);
+
+        $event = $this->publishedEventsQuery($request)
+            ->whereKey($liveEvent->id)
+            ->firstOrFail();
+
+        return view('live-events.show', [
+            'event' => $event,
         ]);
     }
 
@@ -85,5 +84,24 @@ class LiveEventController extends Controller
             ]);
 
         return back()->with('status', 'تم إلغاء الحجز.');
+    }
+
+    private function publishedEventsQuery(Request $request)
+    {
+        $eventsQuery = LiveEvent::query()
+            ->withCount(['registrations' => fn ($query) => $query->where('status', 'registered')])
+            ->where('is_published', true)
+            ->orderByRaw('starts_at is null')
+            ->orderBy('starts_at');
+
+        if ($request->user()) {
+            $eventsQuery->withExists([
+                'registrations as registered_by_current_user' => fn ($query) => $query
+                    ->where('user_id', $request->user()->id)
+                    ->where('status', 'registered'),
+            ]);
+        }
+
+        return $eventsQuery;
     }
 }

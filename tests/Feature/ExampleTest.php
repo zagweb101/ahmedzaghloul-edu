@@ -756,7 +756,7 @@ class ExampleTest extends TestCase
         $event = \App\Models\LiveEvent::where('slug', 'first-live')->firstOrFail();
 
         $this->actingAs($user)
-            ->post("/live-events/{$event->id}/register")
+            ->post("/live-events/{$event->slug}/register")
             ->assertRedirect();
 
         $this->assertDatabaseHas('live_event_registrations', [
@@ -768,7 +768,7 @@ class ExampleTest extends TestCase
         Notification::assertSentTo($user, LiveEventRegistrationNotification::class);
 
         $this->actingAs($user)
-            ->delete("/live-events/{$event->id}/register")
+            ->delete("/live-events/{$event->slug}/register")
             ->assertRedirect();
 
         $this->assertDatabaseHas('live_event_registrations', [

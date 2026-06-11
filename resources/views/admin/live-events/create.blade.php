@@ -31,6 +31,8 @@
                         <textarea class="form-control" id="description" name="description" rows="4">{{ old('description') }}</textarea>
                     </div>
 
+                    <x-admin-seo-fields />
+
                     <div>
                         <label class="form-label" for="cover_image">صورة الغلاف</label>
                         <input class="form-control @error('cover_image') is-invalid @enderror" id="cover_image" name="cover_image" type="file" accept="image/jpeg,image/png,image/webp">

@@ -14,6 +14,7 @@
             'description' => 'أكاديمية عربية لتعليم التصوير الفوتوغرافي والفيديو.',
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
     </script>
+    <x-structured-data.website />
 @endpush
 
 @php
@@ -170,6 +171,21 @@
             </div>
         </section>
 
+        <section id="blog" class="section-block" style="background: var(--bm-surface);">
+            <div class="container">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <p class="fw-bold text-accent mb-2">المدونة</p>
+                        <h2 class="display-6 fw-bold">مقالات ونصائح التصوير</h2>
+                        <p class="text-muted-soft fs-5 mb-0">محتوى مكتوب يساعدك على فهم أساسيات التصوير قبل التطبيق داخل المسارات والمجتمع.</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="{{ route('blog.index') }}" class="btn btn-brand btn-lg w-100">اقرأ المدونة</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="plans" class="section-block">
             <div class="container">
                 <div class="col-lg-8 mb-4">
@@ -189,7 +205,7 @@
                                         <li>{{ $feature }}</li>
                                     @endforeach
                                 </ul>
-                                <a href="{{ route('subscription-plans.index') }}" class="btn {{ $plan->is_featured ? 'btn-light' : 'btn-soft' }} w-100">
+                                <a href="{{ route('subscription-plans.show', $plan) }}" class="btn {{ $plan->is_featured ? 'btn-light' : 'btn-soft' }} w-100">
                                     {{ $plan->slug === 'free' ? 'ابدأ مجانًا' : 'اشترك' }}
                                 </a>
                             </article>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasSeo;
 use App\Enums\AccessLevel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,11 +11,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class LiveEvent extends Model
 {
     use HasFactory;
+    use HasSeo;
 
     protected $fillable = [
         'title',
         'slug',
         'description',
+        'seo_title',
+        'seo_description',
+        'seo_keywords',
         'cover_image_path',
         'starts_at',
         'ends_at',
@@ -45,6 +50,19 @@ class LiveEvent extends Model
     public function registrations(): HasMany
     {
         return $this->hasMany(LiveEventRegistration::class);
+    }
+
+    public function seoDescription(?string $fallback = null): string
+    {
+        if ($this->seo_description) {
+            return $this->seo_description;
+        }
+
+        $description = \Illuminate\Support\Str::limit(strip_tags((string) $this->description), 160, '…');
+
+        return $description !== ''
+            ? $description
+            : ($fallback ?: 'لايف تعليمي أو فعالية من بيت المصور مع أحمد زغلول.');
     }
 
     public function hasAvailableSeats(): bool
