@@ -986,11 +986,15 @@ class ExampleTest extends TestCase
     {
         $this->seed(PlatformSeeder::class);
 
+        $path = \App\Models\LearningPath::where('slug', 'photography-basics')->firstOrFail();
+        $lesson = $path->lessons()->where('is_published', true)->firstOrFail();
+
         $this->get('/sitemap.xml')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/xml')
             ->assertSee(route('home'), false)
-            ->assertSee(route('learning-paths.index'), false);
+            ->assertSee(route('learning-paths.index'), false)
+            ->assertSee(route('lessons.show', [$path, $lesson]), false);
     }
 
     public function test_community_notification_uses_mail_when_enabled(): void

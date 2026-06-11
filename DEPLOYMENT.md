@@ -11,7 +11,7 @@ git init
 git add .
 git commit -m "Initial platform release"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/bayt-almoswer.git
+git remote add origin https://github.com/zagweb101/ahmedzaghloul-edu.git
 git push -u origin main
 ```
 
@@ -32,7 +32,32 @@ git push origin main
 
 ---
 
-## 2) إعداد Hostinger
+## 2) استنساخ المشروع على Hostinger (الطريقة السريعة)
+
+من Terminal في hPanel:
+
+```bash
+chmod +x deploy/hostinger-first-install.sh
+./deploy/hostinger-first-install.sh ~/ahmedzaghloul-edu
+```
+
+ثم عدّل `.env` وشغّل:
+
+```bash
+cd ~/ahmedzaghloul-edu
+./deploy/post-deploy.sh
+./deploy/verify-production.sh
+```
+
+للتحديثات اللاحقة:
+
+```bash
+./deploy/update-production.sh
+```
+
+---
+
+## 3) إعداد Hostinger
 
 ### المتطلبات
 
@@ -57,22 +82,22 @@ git push origin main
 
 1. ارفع المشروع إلى مجلد خارج `public_html`:
    ```
-   /home/USER/bayt-almoswer/
+   /home/USER/ahmedzaghloul-edu/
    ```
 2. من hPanel → **Domains** → **Document Root**:
    ```
-   /home/USER/bayt-almoswer/public
+   /home/USER/ahmedzaghloul-edu/public
    ```
 3. فعّل SSL (Let's Encrypt) من hPanel
 
 ### الطريقة البديلة (بدون تغيير Document Root)
 
-1. ارفع المشروع إلى `/home/USER/bayt-almoswer/`
+1. ارفع المشروع إلى `/home/USER/ahmedzaghloul-edu/`
 2. انسخ `deploy/hostinger-public-index.php` إلى `public_html/index.php`
 3. عدّل سطر `$projectRoot` ليطابق مسار مشروعك:
 
 ```php
-$projectRoot = __DIR__ . '/../bayt-almoswer';
+$projectRoot = __DIR__ . '/../ahmedzaghloul-edu';
 ```
 
 4. انسخ محتويات `public/.htaccess` إلى `public_html/.htaccess` إن لزم
@@ -166,7 +191,7 @@ chmod -R 775 storage bootstrap/cache
 hPanel → **Cron Jobs** → أضف:
 
 ```bash
-* * * * * cd /home/USER/bayt-almoswer && php artisan schedule:run >> /dev/null 2>&1
+* * * * * cd /home/USER/ahmedzaghloul-edu && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 يُشغّل تذكيرات اللايفات كل ساعة تلقائيًا.

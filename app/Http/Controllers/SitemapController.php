@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LearningPath;
+use App\Models\Lesson;
 use App\Models\LiveEvent;
 use Illuminate\Http\Response;
 
@@ -21,11 +22,23 @@ class SitemapController extends Controller
 
         LearningPath::query()
             ->where('is_published', true)
-            ->get(['slug'])
-            ->each(fn ($path) => $urls->push([
-                'loc' => route('learning-paths.show', $path),
-                'priority' => '0.8',
-            ]));
+            ->get(['id', 'slug'])
+            ->each(function ($path) use ($urls) {
+                $urls->push([
+                    'loc' => route('learning-paths.show', $path),
+                    'priority' => '0.8',
+                ]);
+
+                Lesson::query()
+                    ->where('learning_path_id', $path->id)
+                    ->where('is_published', true)
+                    ->orderBy('sort_order')
+                    ->get(['slug'])
+                    ->each(fn ($lesson) => $urls->push([
+                        'loc' => route('lessons.show', [$path, $lesson]),
+                        'priority' => '0.7',
+                    ]));
+            });
 
         LiveEvent::query()
             ->where('is_published', true)

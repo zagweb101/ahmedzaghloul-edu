@@ -3,12 +3,12 @@
 /**
  * استخدم هذا الملف عندما لا تستطيع جعل Document Root يشير إلى مجلد public/.
  *
- * 1. ارفع المشروع كاملًا إلى مجلد خارج public_html (مثال: /home/USER/bayt-almoswer)
+ * 1. ارفع المشروع كاملًا إلى مجلد خارج public_html (مثال: /home/USER/ahmedzaghloul-edu)
  * 2. انسخ هذا الملف إلى public_html/index.php
  * 3. عدّل المسار أدناه ليطابق موقع مشروعك على السيرفر
  */
 
-$projectRoot = __DIR__ . '/../bayt-almoswer';
+$projectRoot = __DIR__ . '/../ahmedzaghloul-edu';
 
 define('LARAVEL_START', microtime(true));
 
