@@ -37,11 +37,13 @@ class PlatformPrelaunchCheckCommand extends Command
             $issues++;
         }
 
-        $iban = (string) config('payments.manual.iban', '');
+        if (! config('payments.demo_mode')) {
+            $iban = (string) config('payments.manual.iban', '');
 
-        if ($iban === '' || str_contains($iban, '0000 0000')) {
-            $this->warn('PAYMENT_IBAN is missing or still using a placeholder.');
-            $issues++;
+            if ($iban === '' || str_contains($iban, '0000 0000')) {
+                $this->warn('PAYMENT_IBAN is missing or still using a placeholder.');
+                $issues++;
+            }
         }
 
         $ga4 = (string) config('seo.google_analytics_id', '');
@@ -51,13 +53,17 @@ class PlatformPrelaunchCheckCommand extends Command
             $issues++;
         }
 
-        if (config('payments.driver') === 'stripe') {
+        if (config('payments.driver') === 'stripe' && ! config('payments.demo_mode')) {
             $stripeKey = (string) config('payments.stripe.secret_key', '');
 
             if ($stripeKey === '' || str_contains($stripeKey, 'xxxxx')) {
                 $this->warn('PAYMENT_DRIVER=stripe but STRIPE_SECRET_KEY is not configured.');
                 $issues++;
             }
+        }
+
+        if (config('payments.demo_mode')) {
+            $this->line('<comment>INFO</comment> PAYMENT_DEMO_MODE is enabled (test purchases allowed).');
         }
 
         if ($issues === 0) {

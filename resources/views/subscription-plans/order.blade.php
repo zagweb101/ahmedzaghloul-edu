@@ -23,9 +23,12 @@
                         </div>
                         <a class="btn btn-brand mt-3" href="{{ route('dashboard') }}">الذهاب إلى لوحتي</a>
                     @elseif ($order->isPending())
-                        @if ($order->payment_driver === 'tap' && $order->checkout_url)
+                        @if ($order->checkout_url && in_array($order->payment_driver, ['tap', 'stripe']))
                             <div class="alert alert-warning mb-0">
-                                أكمل الدفع عبر بوابة Tap لتفعيل اشتراكك.
+                                أكمل الدفع عبر {{ $order->payment_driver === 'stripe' ? 'Stripe' : 'Tap' }} لتفعيل اشتراكك.
+                                @if ($order->payment_driver === 'stripe' && \App\Support\PaymentDisplay::isStripeTestMode())
+                                    <br><small>بطاقة تجريبية: 4242 4242 4242 4242</small>
+                                @endif
                             </div>
                             <a class="btn btn-brand mt-3" href="{{ $order->checkout_url }}" target="_blank" rel="noopener">
                                 إكمال الدفع الآن

@@ -399,6 +399,12 @@ a {
     white-space: pre-line;
 }
 
+.demo-mode-banner {
+    background: #7a4f12;
+    color: #fff8eb;
+    font-size: 0.9rem;
+}
+
 @media (max-width: 767.98px) {
     .hero {
         min-height: auto;

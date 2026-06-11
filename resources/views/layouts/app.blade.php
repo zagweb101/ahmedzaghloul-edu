@@ -43,6 +43,8 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
     <body>
+        <x-demo-mode-banner />
+
         <header class="site-header sticky-top">
             <nav class="container py-3 d-flex align-items-center justify-content-between gap-3">
                 <a href="{{ route('home') }}" class="d-flex align-items-center gap-3 text-reset">
