@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-bs-theme="light">
+<html lang="ar" dir="rtl" data-bs-theme="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="theme-color" content="#5b2d8e">
+        <meta name="theme-color" content="#0f1029">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
         <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
@@ -62,7 +62,7 @@
 
                 <div class="d-flex align-items-center gap-2">
                     <button class="btn btn-soft" type="button" data-theme-toggle>
-                        الوضع الليلي
+                        تبديل المظهر
                     </button>
 
                     @auth
@@ -146,16 +146,26 @@
                 const storageKey = 'bayt-almoswer-theme';
                 const root = document.documentElement;
                 const savedTheme = localStorage.getItem(storageKey);
-                const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                const initialTheme = savedTheme || preferredTheme;
+                const initialTheme = savedTheme || 'dark';
 
                 root.dataset.bsTheme = initialTheme;
+
+                const updateThemeToggleLabel = () => {
+                    const label = root.dataset.bsTheme === 'dark' ? 'الوضع الفاتح' : 'الوضع الداكن';
+
+                    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+                        button.textContent = label;
+                    });
+                };
+
+                updateThemeToggleLabel();
 
                 document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
                     button.addEventListener('click', () => {
                         const nextTheme = root.dataset.bsTheme === 'dark' ? 'light' : 'dark';
                         root.dataset.bsTheme = nextTheme;
                         localStorage.setItem(storageKey, nextTheme);
+                        updateThemeToggleLabel();
                     });
                 });
             })();

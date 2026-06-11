@@ -3,8 +3,9 @@
         <div class="row g-4 align-items-start">
             <div class="col-lg-5">
                 <x-site-logo :compact="false" class="mb-3" />
+                <p class="brand-motto mb-2">{{ config('brand.motto') }}</p>
                 <p class="site-footer-lead mb-0">
-                    أكاديمية عربية تجمع بين التعليم المنظم وشغف التصوير — تعلّم، طبّق، وشارك أعمالك مع مجتمع يحب العدسة.
+                    {{ config('brand.tagline') }} — أكاديمية عربية تجمع بين التعليم المنظم وشغف التصوير.
                 </p>
             </div>
 

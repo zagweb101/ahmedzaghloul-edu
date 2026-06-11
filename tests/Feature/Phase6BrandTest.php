@@ -16,10 +16,12 @@ class Phase6BrandTest extends TestCase
 
         $this->get('/')
             ->assertOk()
-            ->assertSee('أحمد زغلول')
+            ->assertSee('ابدأ رحلتك في')
+            ->assertSee('بيت لكل مصور')
+            ->assertSee('تعلّم · ألهم · أبدع')
             ->assertSee('شهادات الأعضاء')
-            ->assertSee('كن التالي')
-            ->assertSee('logo-mark.svg', false)
+            ->assertSee('logo-horizontal.png', false)
+            ->assertSee('promo-journey.png', false)
             ->assertSee(config('testimonials.items.0.name'));
     }
 }
