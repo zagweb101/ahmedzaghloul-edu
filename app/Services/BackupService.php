@@ -74,9 +74,15 @@ class BackupService
         $sqlName = "database_{$timestamp}.sql";
         $sqlPath = $this->temporaryPath($sqlName);
 
+        $host = $config['host'] ?? '127.0.0.1';
+
+        if (in_array($host, ['localhost', '::1'], true)) {
+            $host = '127.0.0.1';
+        }
+
         $command = [
             'mysqldump',
-            '--host=' . ($config['host'] ?? '127.0.0.1'),
+            '--host=' . $host,
             '--port=' . ($config['port'] ?? '3306'),
             '--user=' . ($config['username'] ?? 'root'),
             '--single-transaction',
