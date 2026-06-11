@@ -31,7 +31,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'backup_disk' => env('BACKUP_DISK', 'local'),
+    'backup_disk' => env('BACKUP_DISK', 'backups'),
 
     'backup_path' => env('BACKUP_PATH', 'backups'),
 

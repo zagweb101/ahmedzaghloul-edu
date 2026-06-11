@@ -18,8 +18,8 @@ class Phase1InfrastructureTest extends TestCase
         parent::setUp();
 
         config([
-            'platform.backup_disk' => 'local',
-            'platform.backup_path' => 'backups',
+            'platform.backup_disk' => 'backups',
+            'platform.backup_path' => '',
             'platform.backup_retention_days' => 14,
         ]);
 
@@ -45,7 +45,7 @@ class Phase1InfrastructureTest extends TestCase
             ->assertSuccessful()
             ->expectsOutputToContain('Storage backup created.');
 
-        $files = Storage::disk('local')->files('backups');
+        $files = Storage::disk('backups')->files();
         $this->assertNotEmpty($files);
         $this->assertTrue(
             collect($files)->contains(fn ($file) => str_contains($file, 'storage_') && str_ends_with($file, '.zip')),
@@ -73,7 +73,7 @@ class Phase1InfrastructureTest extends TestCase
             ->assertSuccessful()
             ->expectsOutputToContain('Database backup created.');
 
-        $files = Storage::disk('local')->files('backups');
+        $files = Storage::disk('backups')->files();
         $this->assertTrue(
             collect($files)->contains(fn ($file) => str_contains($file, 'database_') && str_ends_with($file, '.zip')),
         );
@@ -85,9 +85,9 @@ class Phase1InfrastructureTest extends TestCase
 
     public function test_platform_backup_prunes_old_files(): void
     {
-        Storage::disk('local')->put('backups/old-backup.zip', 'old');
+        Storage::disk('backups')->put('old-backup.zip', 'old');
         touch(
-            Storage::disk('local')->path('backups/old-backup.zip'),
+            Storage::disk('backups')->path('old-backup.zip'),
             now()->subDays(30)->getTimestamp(),
         );
 
@@ -95,7 +95,7 @@ class Phase1InfrastructureTest extends TestCase
 
         $this->artisan('platform:backup', ['--storage' => true])->assertSuccessful();
 
-        $this->assertFalse(Storage::disk('local')->exists('backups/old-backup.zip'));
+        $this->assertFalse(Storage::disk('backups')->exists('old-backup.zip'));
     }
 
     public function test_platform_log_review_runs_successfully(): void

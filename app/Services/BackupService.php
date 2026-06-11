@@ -52,8 +52,8 @@ class BackupService
 
     public function pruneOldBackups(): int
     {
-        $disk = Storage::disk(config('platform.backup_disk', 'local'));
-        $path = config('platform.backup_path', 'backups');
+        $disk = Storage::disk(config('platform.backup_disk', 'backups'));
+        $path = trim((string) config('platform.backup_path', ''), '/');
         $retentionDays = config('platform.backup_retention_days', 14);
         $cutoff = now()->subDays($retentionDays)->getTimestamp();
         $deleted = 0;
@@ -145,9 +145,9 @@ class BackupService
 
     private function storeArchive(string $sourcePath, string $destinationName): string
     {
-        $disk = Storage::disk(config('platform.backup_disk', 'local'));
-        $path = trim(config('platform.backup_path', 'backups'), '/');
-        $destination = "{$path}/{$destinationName}";
+        $disk = Storage::disk(config('platform.backup_disk', 'backups'));
+        $path = trim((string) config('platform.backup_path', ''), '/');
+        $destination = $path !== '' ? "{$path}/{$destinationName}" : $destinationName;
 
         $disk->put($destination, file_get_contents($sourcePath));
         File::delete($sourcePath);
