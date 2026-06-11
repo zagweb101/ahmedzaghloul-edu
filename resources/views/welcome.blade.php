@@ -39,7 +39,15 @@
 
 @section('content')
     <div id="top">
-        <section class="hero-cinematic hero-cinematic--gradient">
+        <section class="hero-cinematic">
+            <div class="hero-cinematic__media" aria-hidden="true">
+                <img
+                    src="{{ asset(config('brand.hero_background')) }}"
+                    alt=""
+                    loading="eager"
+                    decoding="async"
+                >
+            </div>
             <div class="hero-cinematic__overlay" aria-hidden="true"></div>
 
             <div class="container-fluid hero-cinematic__content px-3 px-sm-4 px-xl-5">

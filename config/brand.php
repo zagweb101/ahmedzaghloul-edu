@@ -8,4 +8,6 @@ return [
 
     'logo_icon' => 'icons/logo-mark.svg',
 
+    'hero_background' => 'images/brand/hero-studio-bg.png',
+
 ];
