@@ -34,66 +34,58 @@
         ? number_format($plan->price_cents / 100) . ' ' . $plan->currency
         : ($plan->slug === 'free' ? '0 ريال' : 'يحدد لاحقا');
 
-    $brandImages = config('brand.images');
+    $topicLabels = ['أساسيات الإضاءة', 'تصوير المنتجات', 'الفيديو والمونتاج'];
 @endphp
 
 @section('content')
     <div id="top">
-        <section class="hero-cinematic">
-            <div class="hero-cinematic__media" aria-hidden="true">
-                <img
-                    src="{{ asset($brandImages['hero']) }}"
-                    alt="أكاديمية بيت المصور — استوديو تعليم التصوير مع أحمد زغلول"
-                    loading="eager"
-                    decoding="async"
-                >
-            </div>
+        <section class="hero-cinematic hero-cinematic--gradient">
             <div class="hero-cinematic__overlay" aria-hidden="true"></div>
 
             <div class="container-fluid hero-cinematic__content px-3 px-sm-4 px-xl-5">
                 <div class="row justify-content-start">
                     <div class="col-lg-7 col-xl-6">
-                    <p class="hero-eyebrow mb-3">{{ config('brand.tagline') }}</p>
-                    <p class="brand-motto mb-4">{{ config('brand.motto') }}</p>
-                    <h1 class="hero-title mb-4">
-                        <span class="heading-viewfinder d-inline-block mb-2">ابدأ رحلتك في</span><br>
-                        <span class="text-gradient">التصوير باحتراف</span>
-                    </h1>
-                    <p class="lead text-muted-soft mb-4">
-                        أكاديمية عربية تجمع التعليم المنظم وشغف العدسة — مع أحمد زغلول ومجتمع يحب التصوير.
-                    </p>
-                    <div class="d-grid d-sm-flex gap-2 mb-5">
-                        <a href="{{ route('subscription-plans.index') }}" class="btn btn-brand btn-lg">ابدأ الاشتراك</a>
-                        <a href="{{ route('learning-paths.index') }}" class="btn btn-soft btn-lg">استكشف المسارات</a>
-                    </div>
+                        <p class="hero-eyebrow mb-3">{{ config('brand.tagline') }}</p>
+                        <p class="brand-motto mb-4">{{ config('brand.motto') }}</p>
+                        <h1 class="hero-title mb-4">
+                            <span class="heading-viewfinder d-inline-block mb-2">ابدأ رحلتك في</span><br>
+                            <span class="text-gradient">التصوير باحتراف</span>
+                        </h1>
+                        <p class="lead text-muted-soft mb-4">
+                            أكاديمية عربية تجمع التعليم المنظم وشغف العدسة — مع أحمد زغلول ومجتمع يحب التصوير.
+                        </p>
+                        <div class="d-grid d-sm-flex gap-2 mb-5">
+                            <a href="{{ route('subscription-plans.index') }}" class="btn btn-brand btn-lg">ابدأ الاشتراك</a>
+                            <a href="{{ route('learning-paths.index') }}" class="btn btn-soft btn-lg">استكشف المسارات</a>
+                        </div>
 
-                    <div class="row g-3">
-                        <div class="col-6 col-md-3">
-                            <div class="stat-pill">
-                                <strong>{{ $stats['paths'] }}</strong>
-                                <span class="text-muted-soft">مسار</span>
+                        <div class="row g-3">
+                            <div class="col-6 col-md-3">
+                                <div class="stat-pill">
+                                    <strong>{{ $stats['paths'] }}</strong>
+                                    <span class="text-muted-soft">مسار</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-pill">
-                                <strong>{{ $stats['lessons'] }}</strong>
-                                <span class="text-muted-soft">درس</span>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-pill">
+                                    <strong>{{ $stats['lessons'] }}</strong>
+                                    <span class="text-muted-soft">درس</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-pill">
-                                <strong>{{ $stats['live_events'] }}</strong>
-                                <span class="text-muted-soft">لايف</span>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-pill">
+                                    <strong>{{ $stats['live_events'] }}</strong>
+                                    <span class="text-muted-soft">لايف</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-pill">
-                                <strong>{{ $stats['community_posts'] }}</strong>
-                                <span class="text-muted-soft">مشاركة</span>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-pill">
+                                    <strong>{{ $stats['community_posts'] }}</strong>
+                                    <span class="text-muted-soft">مشاركة</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </section>
@@ -141,60 +133,31 @@
                     <h2 class="display-6 fw-bold">تخصصات التصوير داخل المنصة</h2>
                 </div>
                 <div class="row g-3">
-                    <div class="col-md-4">
-                        <a class="topic-card d-block text-reset" href="{{ route('learning-paths.index') }}">
-                            <img src="{{ asset($brandImages['lighting_basics']) }}" alt="أساسيات الإضاءة" loading="lazy">
-                            <div class="topic-card__overlay">
-                                <h3 class="topic-card__title">أساسيات الإضاءة</h3>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="topic-card d-block text-reset" href="{{ route('learning-paths.index') }}">
-                            <img src="{{ asset($brandImages['product_photo']) }}" alt="تصوير المنتجات" loading="lazy">
-                            <div class="topic-card__overlay">
-                                <h3 class="topic-card__title">تصوير المنتجات</h3>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="topic-card d-block text-reset" href="{{ route('learning-paths.index') }}">
-                            <img src="{{ asset($brandImages['video_editing']) }}" alt="تصوير الفيديو والمونتاج" loading="lazy">
-                            <div class="topic-card__overlay">
-                                <h3 class="topic-card__title">الفيديو والمونتاج</h3>
-                            </div>
-                        </a>
-                    </div>
+                    @foreach ($topicLabels as $topic)
+                        <div class="col-md-4">
+                            <a class="community-chip d-block text-center" href="{{ route('learning-paths.index') }}">{{ $topic }}</a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </section>
 
         <section id="trainer" class="section-block">
             <div class="container">
-                <div class="promo-panel promo-panel--reverse">
-                    <div class="promo-panel__media">
-                        <img
-                            src="{{ asset($brandImages['about']) }}"
-                            alt="أحمد زغلول في أكاديمية بيت المصور"
-                            loading="lazy"
-                            decoding="async"
-                        >
-                    </div>
-                    <div class="promo-panel__body">
-                        <p class="section-eyebrow">من نحن</p>
-                        <h2 class="display-6 fw-bold mb-3">تعليم + تصوير + مجتمع</h2>
-                        <p class="text-muted-soft fs-5 mb-4">
-                            بيئة تشبه الاستوديو الاحترافي — تتعلم الإضاءة والتكوين والمعالجة،
-                            وتشارك أعمالك داخل مجتمع عربي يحب العدسة.
-                        </p>
-                        <ul class="check-list list-unstyled d-grid gap-2 mb-4">
-                            <li>مسارات من المبتدئ للمحترف</li>
-                            <li>لايفات وتحديات أسبوعية</li>
-                            <li>توجيه مباشر من أحمد زغلول</li>
-                        </ul>
-                        <a href="{{ route('register') }}" class="btn btn-brand btn-lg">انضم للأكاديمية</a>
-                    </div>
-                </div>
+                <article class="surface-card p-4 p-lg-5">
+                    <p class="section-eyebrow">من نحن</p>
+                    <h2 class="display-6 fw-bold mb-3">تعليم + تصوير + مجتمع</h2>
+                    <p class="text-muted-soft fs-5 mb-4">
+                        بيئة تشبه الاستوديو الاحترافي — تتعلم الإضاءة والتكوين والمعالجة،
+                        وتشارك أعمالك داخل مجتمع عربي يحب العدسة.
+                    </p>
+                    <ul class="check-list list-unstyled d-grid gap-2 mb-4">
+                        <li>مسارات من المبتدئ للمحترف</li>
+                        <li>لايفات وتحديات أسبوعية</li>
+                        <li>توجيه مباشر من أحمد زغلول</li>
+                    </ul>
+                    <a href="{{ route('register') }}" class="btn btn-brand btn-lg">انضم للأكاديمية</a>
+                </article>
             </div>
         </section>
 
@@ -202,20 +165,15 @@
 
         <section id="community" class="section-block section-surface">
             <div class="container">
-                <div class="promo-panel">
-                    <div class="promo-panel__media">
-                        <img
-                            src="{{ asset($brandImages['workshop']) }}"
-                            alt="ورشة تصوير داخل أكاديمية بيت المصور"
-                            loading="lazy"
-                        >
-                    </div>
-                    <div class="promo-panel__body">
+                <div class="row align-items-start g-4">
+                    <div class="col-lg-5">
                         <p class="section-eyebrow">المجتمع</p>
-                        <h2 class="display-6 fw-bold mb-3">تطبّق وتتفاعل كل أسبوع</h2>
-                        <p class="text-muted-soft fs-5 mb-4">ليس مكتبة فيديوهات فقط — مساحة تطبيق وتفاعل مع مصورين يشاركونك الشغف.</p>
+                        <h2 class="display-6 fw-bold">تطبّق وتتفاعل كل أسبوع</h2>
+                        <p class="text-muted-soft fs-5">ليس مكتبة فيديوهات فقط — مساحة تطبيق وتفاعل مع مصورين يشاركونك الشغف.</p>
+                    </div>
+                    <div class="col-lg-7">
                         <div class="row g-2">
-                            @foreach (['اسأل أحمد', 'شارك صورتك', 'تحدي الأسبوع', 'نقد وتقييم'] as $section)
+                            @foreach (['اسأل أحمد', 'شارك صورتك', 'تحدي الأسبوع', 'نقد وتقييم', 'معدات وتجهيزات', 'فعاليات جدة'] as $section)
                                 <div class="col-sm-6">
                                     <div class="community-chip">{{ $section }}</div>
                                 </div>
@@ -230,24 +188,17 @@
         <section id="live" class="section-block">
             <div class="container">
                 <div class="row align-items-center g-4">
-                    <div class="col-lg-7">
+                    <div class="col-lg-8">
                         <p class="section-eyebrow">لايفات وفعاليات</p>
                         <h2 class="display-6 fw-bold">{{ $upcomingLive?->title ?? 'لايفات وفعاليات قادمة' }}</h2>
                         <p class="text-muted-soft fs-5 mb-0">{{ $upcomingLive?->description ?? 'صفحة اللايفات تعرض الموعد، الموضوع، التسجيل، وأرشيف اللايفات السابقة للمشتركين.' }}</p>
                     </div>
-                    <div class="col-lg-5">
-                        <div class="surface-card overflow-hidden">
-                            <img
-                                class="card-cover"
-                                src="{{ asset($brandImages['instructors']) }}"
-                                alt="جلسة تدريب مباشرة في بيت المصور"
-                                loading="lazy"
-                            >
-                            <div class="p-4">
-                                <span class="text-muted-soft">الموعد</span>
-                                <strong class="fs-4 d-block my-2">{{ $upcomingLive?->starts_at?->translatedFormat('d F Y - h:i A') ?? 'يحدد لاحقًا' }}</strong>
-                                <a class="btn btn-brand w-100 mt-2" href="{{ route('live-events.index') }}">عرض اللايفات</a>
-                            </div>
+                    <div class="col-lg-4">
+                        <div class="surface-card p-4">
+                            <span class="text-muted-soft">الموعد</span>
+                            <strong class="fs-3 d-block my-2">{{ $upcomingLive?->starts_at?->translatedFormat('d F Y - h:i A') ?? 'يحدد لاحقًا' }}</strong>
+                            <small class="text-muted-soft">{{ $upcomingLive ? ($accessLabels[$upcomingLive->access_level->value] ?? 'للمشتركين') : 'قريبًا' }}</small>
+                            <a class="btn btn-brand w-100 mt-3" href="{{ route('live-events.index') }}">عرض اللايفات</a>
                         </div>
                     </div>
                 </div>

@@ -163,12 +163,21 @@ a {
     object-position: 58% center;
 }
 
+.hero-cinematic--gradient {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(92, 225, 255, 0.14), transparent 34%),
+        radial-gradient(circle at 85% 12%, rgba(230, 30, 80, 0.18), transparent 32%),
+        var(--bm-gradient-soft),
+        var(--bm-bg);
+}
+
 .hero-cinematic__overlay {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(270deg, rgba(10, 11, 30, 0.95) 0%, rgba(10, 11, 30, 0.72) 38%, rgba(10, 11, 30, 0.25) 72%, rgba(10, 11, 30, 0.45) 100%),
-        linear-gradient(180deg, transparent 50%, rgba(10, 11, 30, 0.88) 100%);
+        linear-gradient(270deg, rgba(10, 11, 30, 0.82) 0%, rgba(10, 11, 30, 0.45) 45%, rgba(10, 11, 30, 0.2) 100%),
+        linear-gradient(180deg, transparent 55%, rgba(10, 11, 30, 0.75) 100%);
+    pointer-events: none;
 }
 
 .hero-cinematic__content {
