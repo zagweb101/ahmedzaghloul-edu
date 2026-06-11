@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="theme-color" content="#b6864b">
+        <meta name="theme-color" content="#5b2d8e">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
         <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
@@ -38,29 +38,26 @@
 
         <x-google-analytics />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.rtl.min.css') }}">
         @stack('head')
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         <x-demo-mode-banner />
 
         <header class="site-header sticky-top">
             <nav class="container py-3 d-flex align-items-center justify-content-between gap-3">
-                <a href="{{ route('home') }}" class="d-flex align-items-center gap-3 text-reset">
-                    <span class="brand-mark">BM</span>
-                    <span>
-                        <strong class="d-block">بيت المصور</strong>
-                        <small class="text-muted-soft">أكاديمية أحمد زغلول</small>
-                    </span>
-                </a>
+                <x-site-logo />
 
-                <div class="d-none d-lg-flex align-items-center gap-4 text-muted-soft">
-                    <a href="{{ route('learning-paths.index') }}" class="text-reset">المسارات</a>
-                    <a href="{{ route('community.index') }}" class="text-reset">المجتمع</a>
-                    <a href="{{ route('live-events.index') }}" class="text-reset">اللايفات</a>
-                    <a href="{{ route('blog.index') }}" class="text-reset">المدونة</a>
-                    <a href="{{ route('subscription-plans.index') }}" class="text-reset">الاشتراكات</a>
+                <div class="d-none d-lg-flex align-items-center gap-4">
+                    <a href="{{ route('learning-paths.index') }}" class="site-nav-link">المسارات</a>
+                    <a href="{{ route('community.index') }}" class="site-nav-link">المجتمع</a>
+                    <a href="{{ route('live-events.index') }}" class="site-nav-link">اللايفات</a>
+                    <a href="{{ route('blog.index') }}" class="site-nav-link">المدونة</a>
+                    <a href="{{ route('subscription-plans.index') }}" class="site-nav-link">الاشتراكات</a>
                 </div>
 
                 <div class="d-flex align-items-center gap-2">
@@ -131,7 +128,11 @@
             </div>
         </div>
 
-        @yield('content')
+        <main class="flex-grow-1">
+            @yield('content')
+        </main>
+
+        <x-site-footer />
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('js/pwa.js') }}" defer></script>

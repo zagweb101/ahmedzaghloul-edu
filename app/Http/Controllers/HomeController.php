@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommunityPost;
 use App\Models\LearningPath;
+use App\Models\Lesson;
 use App\Models\LiveEvent;
 use App\Models\SubscriptionPlan;
 use Illuminate\Contracts\View\View;
@@ -26,6 +28,14 @@ class HomeController extends Controller
                 ->orderByRaw('starts_at is null')
                 ->orderBy('starts_at')
                 ->first(),
+            'stats' => [
+                'paths' => LearningPath::query()->where('is_published', true)->count(),
+                'lessons' => Lesson::query()
+                    ->whereHas('learningPath', fn ($query) => $query->where('is_published', true))
+                    ->count(),
+                'live_events' => LiveEvent::query()->where('is_published', true)->count(),
+                'community_posts' => CommunityPost::query()->where('is_published', true)->count(),
+            ],
         ]);
     }
 }

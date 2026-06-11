@@ -36,62 +36,73 @@
 @endphp
 
 @section('content')
-    <main id="top">
+    <div id="top">
         <section class="hero container">
             <div class="row align-items-center g-5">
-                <div class="col-lg-7">
-                    <p class="fw-bold text-accent mb-3">من جدة إلى كل المصورين العرب</p>
-                    <h1 class="hero-title fw-bold mb-4">مجتمع تعليمي لتطوير المصورين مع أحمد زغلول</h1>
+                <div class="col-lg-6">
+                    <p class="hero-eyebrow mb-4">من جدة إلى كل المصورين العرب</p>
+                    <h1 class="hero-title mb-4">
+                        تعلّم التصوير بفرحة مع
+                        <span class="text-gradient">أحمد زغلول</span>
+                    </h1>
                     <p class="lead text-muted-soft mb-4">
-                        تعلم التصوير من الأساسيات للاحتراف عبر مسارات واضحة، فيديوهات مستمرة،
-                        لايفات، تحديات، ومجتمع يساعدك تطبق وتتطور.
+                        أكاديمية تجمع بين التعليم المنظم وشغف العدسة — مسارات واضحة، لايفات حيّة،
+                        ومجتمع يشجّعك تطبّق وتشارك أعمالك كل أسبوع.
                     </p>
                     <div class="d-grid d-sm-flex gap-2 mb-5">
-                        <a href="{{ route('subscription-plans.index') }}" class="btn btn-brand btn-lg">ابدأ الاشتراك</a>
-                        <a href="{{ route('learning-paths.index') }}" class="btn btn-soft btn-lg">شاهد المسارات</a>
+                        <a href="{{ route('subscription-plans.index') }}" class="btn btn-brand btn-lg">ابدأ رحلتك الآن</a>
+                        <a href="{{ route('learning-paths.index') }}" class="btn btn-soft btn-lg">استكشف المسارات</a>
                     </div>
+
                     <div class="row g-3">
-                        <div class="col-6 col-md-4">
-                            <div class="surface-card p-3">
-                                <strong class="fs-4 d-block">8</strong>
-                                <span class="text-muted-soft">مسارات تعليمية</span>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-pill">
+                                <strong>{{ $stats['paths'] }}</strong>
+                                <span class="text-muted-soft">مسار تعليمي</span>
                             </div>
                         </div>
-                        <div class="col-6 col-md-4">
-                            <div class="surface-card p-3">
-                                <strong class="fs-4 d-block">3</strong>
-                                <span class="text-muted-soft">مستويات</span>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-pill">
+                                <strong>{{ $stats['lessons'] }}</strong>
+                                <span class="text-muted-soft">درس</span>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="surface-card p-3">
-                                <strong class="fs-4 d-block">مستمرة</strong>
-                                <span class="text-muted-soft">لايفات وفعاليات</span>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-pill">
+                                <strong>{{ $stats['live_events'] }}</strong>
+                                <span class="text-muted-soft">لايف وفعالية</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-pill">
+                                <strong>{{ $stats['community_posts'] }}</strong>
+                                <span class="text-muted-soft">مشاركة مجتمع</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-5">
-                    <aside class="surface-card p-4">
-                        <div class="d-flex justify-content-between text-muted-soft mb-4">
-                            <span>لوحة العضو</span>
-                            <strong>اليوم</strong>
+                <div class="col-lg-6">
+                    <div class="hero-portrait-wrap">
+                        <div class="hero-portrait-ring" aria-hidden="true"></div>
+                        <div class="hero-portrait-frame">
+                            <img
+                                src="{{ asset('images/brand/ahmed-zaghloul-portrait.png') }}"
+                                alt="أحمد زغلول — مدرب التصوير في بيت المصور"
+                                width="420"
+                                height="525"
+                                loading="eager"
+                                decoding="async"
+                            >
+                            <div class="hero-viewfinder" aria-hidden="true">
+                                <span></span><span></span><span></span><span></span>
+                            </div>
                         </div>
-                        <div class="bg-body border rounded-3 p-4 mb-3">
-                            <small class="fw-bold text-accent">ابدأ من هنا</small>
-                            <h2 class="h3 mt-3">اساسيات التصوير الفوتوغرافي</h2>
-                            <p class="text-muted-soft mb-0">أكمل أول درس، ثم شارك تطبيقك داخل المجتمع.</p>
+                        <div class="hero-quote-card">
+                            <small class="text-accent fw-bold d-block mb-2">رسالة المدرب</small>
+                            <p class="mb-0">«التصوير موهبة، لكن الإتقان يأتي بالتعلّم والتطبيق — وأنا هنا عشان أمشي معك خطوة بخطوة.»</p>
                         </div>
-                        <div class="border-top py-3">
-                            <span class="d-block text-muted-soft">اللايف القادم</span>
-                            <strong>كيف تبدأ رحلتك في التصوير</strong>
-                        </div>
-                        <div class="border-top pt-3">
-                            <span class="d-block text-muted-soft">تحدي الأسبوع</span>
-                            <strong>صورة بورتريه بضوء طبيعي</strong>
-                        </div>
-                    </aside>
+                    </div>
                 </div>
             </div>
         </section>
@@ -99,9 +110,9 @@
         <section id="paths" class="section-block">
             <div class="container">
                 <div class="col-lg-8 mb-4">
-                    <p class="fw-bold text-accent mb-2">رحلات تعليمية واضحة</p>
-                    <h2 class="display-5 fw-bold">المسارات</h2>
-                    <p class="lead text-muted-soft">كل مسار مبني حول نتيجة عملية، وليس مجرد مجموعة فيديوهات.</p>
+                    <p class="section-eyebrow">رحلات تعليمية واضحة</p>
+                    <h2 class="display-5 fw-bold">من الأساسيات إلى الاحتراف</h2>
+                    <p class="lead text-muted-soft">كل مسار مبني حول نتيجة عملية — تخرج منه بصور أنت فخور فيها.</p>
                 </div>
                 <div class="row g-3">
                     @forelse ($paths as $path)
@@ -111,14 +122,14 @@
                                     <img class="card-cover" src="{{ $path->coverImageUrl() }}" alt="{{ $path->title }}">
                                 @endif
                                 <div class="p-4">
-                                <span class="badge badge-soft mb-3">{{ $levelLabels[$path->level->value] ?? 'مسار' }}</span>
-                                <h3 class="h5">{{ $path->title }}</h3>
-                                <p class="text-muted-soft">{{ $path->description }}</p>
-                                <div class="d-flex justify-content-between text-muted-soft my-4">
-                                    <span>{{ $path->lessons_count }} درس</span>
-                                    <span>{{ $accessLabels[$path->access_level->value] ?? 'للمشتركين' }}</span>
-                                </div>
-                                <a class="btn btn-soft w-100" href="{{ route('learning-paths.show', $path) }}">عرض المسار</a>
+                                    <span class="badge badge-soft mb-3">{{ $levelLabels[$path->level->value] ?? 'مسار' }}</span>
+                                    <h3 class="h5">{{ $path->title }}</h3>
+                                    <p class="text-muted-soft">{{ $path->description }}</p>
+                                    <div class="d-flex justify-content-between text-muted-soft my-4">
+                                        <span>{{ $path->lessons_count }} درس</span>
+                                        <span>{{ $accessLabels[$path->access_level->value] ?? 'للمشتركين' }}</span>
+                                    </div>
+                                    <a class="btn btn-soft w-100" href="{{ route('learning-paths.show', $path) }}">عرض المسار</a>
                                 </div>
                             </article>
                         </div>
@@ -131,19 +142,52 @@
             </div>
         </section>
 
-        <section id="community" class="section-block" style="background: var(--bm-surface);">
+        <section id="trainer" class="section-block section-surface">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-5">
+                        <div class="trainer-spotlight">
+                            <img
+                                src="{{ asset('images/brand/ahmed-zaghloul-creative.png') }}"
+                                alt="أحمد زغلول في جلسة تصوير إبداعية"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <p class="section-eyebrow">لماذا بيت المصور؟</p>
+                        <h2 class="display-6 fw-bold mb-3">تعليم + تصوير + مجتمع في مكان واحد</h2>
+                        <p class="text-muted-soft fs-5 mb-4">
+                            ليست منصة فيديوهات فقط — هنا تتعلم الإضاءة والتكوين والمعالجة،
+                            وتشارك أعمالك، وتستفيد من توجيه مباشر داخل بيئة صُممت للمصورين.
+                        </p>
+                        <ul class="check-list list-unstyled d-grid gap-2 mb-4">
+                            <li>مسارات مرتبة من المبتدئ للمحترف</li>
+                            <li>لايفات وتحديات أسبوعية تحفّزك على التطبيق</li>
+                            <li>مجتمع عربي يحب العدسة ويشجّع بعضه</li>
+                        </ul>
+                        <a href="{{ route('register') }}" class="btn btn-brand btn-lg">انضم للمجتمع</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <x-testimonials-section />
+
+        <section id="community" class="section-block">
             <div class="container">
                 <div class="row align-items-start g-5">
                     <div class="col-lg-5">
-                        <p class="fw-bold text-accent mb-2">قيمة الاشتراك الحقيقية</p>
-                        <h2 class="display-6 fw-bold">مجتمع تطبيقي، مش مكتبة فيديوهات فقط</h2>
-                        <p class="text-muted-soft fs-5">العضو يتعلم، يطبق، يسأل، يشارك أعماله، ويحصل على توجيه داخل بيئة منظمة للمصورين.</p>
+                        <p class="section-eyebrow">قيمة الاشتراك الحقيقية</p>
+                        <h2 class="display-6 fw-bold">مجتمع يطبّق ويتفاعل</h2>
+                        <p class="text-muted-soft fs-5">تعلّم، طبّق، ارفع صورتك، وخذ رأي مصورين يشاركونك الشغف.</p>
                     </div>
                     <div class="col-lg-7">
                         <div class="row g-3">
                             @foreach (['اسأل أحمد', 'شارك صورتك', 'تحدي الأسبوع', 'نقد وتقييم', 'معدات وتجهيزات', 'فعاليات جدة'] as $section)
                                 <div class="col-md-6">
-                                    <div class="bg-body border rounded-3 p-4 fw-bold">{{ $section }}</div>
+                                    <div class="community-chip">{{ $section }}</div>
                                 </div>
                             @endforeach
                         </div>
@@ -152,11 +196,11 @@
             </div>
         </section>
 
-        <section id="live" class="section-block">
+        <section id="live" class="section-block section-surface">
             <div class="container">
                 <div class="row align-items-center g-4">
                     <div class="col-lg-8">
-                        <p class="fw-bold text-accent mb-2">لايفات وفعاليات</p>
+                        <p class="section-eyebrow">لايفات وفعاليات</p>
                         <h2 class="display-6 fw-bold">{{ $upcomingLive?->title ?? 'لايفات وفعاليات قادمة' }}</h2>
                         <p class="text-muted-soft fs-5 mb-0">{{ $upcomingLive?->description ?? 'صفحة اللايفات تعرض الموعد، الموضوع، التسجيل، وأرشيف اللايفات السابقة للمشتركين.' }}</p>
                     </div>
@@ -165,33 +209,36 @@
                             <span class="text-muted-soft">الموعد</span>
                             <strong class="fs-3 d-block my-2">{{ $upcomingLive?->starts_at?->translatedFormat('d F Y - h:i A') ?? 'يحدد لاحقا' }}</strong>
                             <small class="text-muted-soft">{{ $upcomingLive ? ($accessLabels[$upcomingLive->access_level->value] ?? 'للمشتركين') : 'قريبًا' }}</small>
+                            <a class="btn btn-brand w-100 mt-3" href="{{ route('live-events.index') }}">عرض اللايفات</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="blog" class="section-block" style="background: var(--bm-surface);">
+        <section id="blog" class="section-block">
             <div class="container">
-                <div class="row align-items-center g-4">
-                    <div class="col-lg-8">
-                        <p class="fw-bold text-accent mb-2">المدونة</p>
-                        <h2 class="display-6 fw-bold">مقالات ونصائح التصوير</h2>
-                        <p class="text-muted-soft fs-5 mb-0">محتوى مكتوب يساعدك على فهم أساسيات التصوير قبل التطبيق داخل المسارات والمجتمع.</p>
-                    </div>
-                    <div class="col-lg-4">
-                        <a href="{{ route('blog.index') }}" class="btn btn-brand btn-lg w-100">اقرأ المدونة</a>
+                <div class="cta-band p-4 p-md-5">
+                    <div class="row align-items-center g-4">
+                        <div class="col-lg-8">
+                            <p class="section-eyebrow text-white-50">المدونة</p>
+                            <h2 class="display-6 fw-bold mb-2">نصائح تصوير تفتح لك أفقًا جديدًا</h2>
+                            <p class="text-muted-soft mb-0">مقالات مكتوبة تساعدك تفهم الأساسيات قبل التطبيق داخل المسارات والمجتمع.</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="{{ route('blog.index') }}" class="btn btn-light btn-lg w-100">اقرأ المدونة</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="plans" class="section-block">
+        <section id="plans" class="section-block pt-0">
             <div class="container">
                 <div class="col-lg-8 mb-4">
-                    <p class="fw-bold text-accent mb-2">اشتراكات بسيطة</p>
-                    <h2 class="display-5 fw-bold">اختر الخطة المناسبة</h2>
-                    <p class="lead text-muted-soft">نبدأ بثلاث خطط واضحة، ونترك لايف تايم كعرض إطلاق لاحقًا إذا احتجناه.</p>
+                    <p class="section-eyebrow">اشتراكات بسيطة</p>
+                    <h2 class="display-5 fw-bold">اختر الخطة وابدأ اليوم</h2>
+                    <p class="lead text-muted-soft">خطط واضحة بدون تعقيد — ابدأ مجانًا ثم انتقل للخطة التي تناسبك.</p>
                 </div>
                 <div class="row g-3">
                     @forelse ($plans as $plan)
@@ -218,5 +265,5 @@
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 @endsection

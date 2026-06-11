@@ -1,5 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="(J* 'DE5H1">
-    <rect width="512" height="512" rx="96" fill="#111111"/>
-    <rect x="64" y="64" width="384" height="384" rx="72" fill="#b6864b"/>
-    <text x="256" y="300" text-anchor="middle" font-family="Arial, Tahoma, sans-serif" font-size="132" font-weight="700" fill="#111111">BM</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="بيت المصور">
+    <defs>
+        <linearGradient id="bm-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#5B2D8E"/>
+            <stop offset="55%" stop-color="#9B2D9E"/>
+            <stop offset="100%" stop-color="#E61E50"/>
+        </linearGradient>
+    </defs>
+    <rect width="512" height="512" rx="112" fill="url(#bm-gradient)"/>
+    <path fill="none" stroke="#ffffff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" d="M256 96 L384 176 L384 384 L128 384 L128 176 Z"/>
+    <path fill="none" stroke="#ffffff" stroke-width="20" stroke-linecap="round" d="M160 160 L192 160 M320 160 L352 160 M160 320 L192 320 M320 320 L352 320"/>
+    <circle cx="256" cy="256" r="58" fill="none" stroke="#ffffff" stroke-width="20"/>
+    <circle cx="228" cy="240" r="14" fill="#ffffff"/>
+    <circle cx="280" cy="272" r="10" fill="#ffffff" opacity="0.85"/>
 </svg>

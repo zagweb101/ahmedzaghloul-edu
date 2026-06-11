@@ -8,7 +8,7 @@
     <div class="container">
         <div class="col-lg-8">
             @if ($eyebrow)
-                <p class="fw-bold text-accent mb-2">{{ $eyebrow }}</p>
+                <p class="section-eyebrow">{{ $eyebrow }}</p>
             @endif
             <h1 class="display-5 fw-bold mb-3">{{ $title }}</h1>
             @if ($description)

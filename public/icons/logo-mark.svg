@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="(J* 'DE5H1">
+    <defs>
+        <linearGradient id="bm-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#5B2D8E"/>
+            <stop offset="55%" stop-color="#9B2D9E"/>
+            <stop offset="100%" stop-color="#E61E50"/>
+        </linearGradient>
+    </defs>
+    <rect width="120" height="120" rx="28" fill="url(#bm-gradient)"/>
+    <path fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M60 24 L88 44 L88 88 L32 88 L32 44 Z"/>
+    <path fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" d="M38 38 L48 38 M72 38 L82 38 M38 74 L48 74 M72 74 L82 74"/>
+    <circle cx="60" cy="60" r="14" fill="none" stroke="#ffffff" stroke-width="5"/>
+    <circle cx="54" cy="56" r="3.5" fill="#ffffff"/>
+    <circle cx="66" cy="64" r="2.5" fill="#ffffff" opacity="0.85"/>
+</svg>
