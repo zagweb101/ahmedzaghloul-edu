@@ -127,6 +127,13 @@ php artisan schedule:work
 - بث اللايف لمن حجز مقعدًا خلال نافذة الموعد
 - Stripe Checkout + webhook على `/payments/stripe/webhook`
 
+## PWA وإشعارات المتصفح (Phase 4)
+
+- `manifest.webmanifest` + Service Worker + أيقونة التطبيق
+- Web Push اختياري عبر `PUSH_NOTIFICATIONS_ENABLED=true`
+- توليد مفاتيح VAPID: `php artisan push:generate-vapid`
+- تفعيل الإشعارات من لوحة العضو
+
 ## النشر (GitHub + Hostinger)
 
 راجع دليل النشر الكامل في [DEPLOYMENT.md](DEPLOYMENT.md).

@@ -18,7 +18,7 @@ class SubscriptionExpiredNotification extends Notification
     /** @return list<string> */
     public function via(object $notifiable): array
     {
-        return $this->platformChannels();
+        return $this->platformChannels($notifiable);
     }
 
     public function toMail(object $notifiable): MailMessage

@@ -1,0 +1,26 @@
+{
+    "name": "بيت المصور",
+    "short_name": "بيت المصور",
+    "description": "منصة تعليمية عربية لتطوير المصورين مع أحمد زغلول",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#b6864b",
+    "lang": "ar",
+    "dir": "rtl",
+    "icons": [
+        {
+            "src": "/icons/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        }
+    ]
+}

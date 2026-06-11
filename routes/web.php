@@ -13,6 +13,7 @@ use App\Http\Controllers\SubscriptionCheckoutController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\PaymentCallbackController;
+use App\Http\Controllers\PushSubscriptionController;
 use App\Http\Controllers\Admin\SubscriptionOrderController as AdminSubscriptionOrderController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\LearningPathController as AdminLearningPathController;
@@ -23,6 +24,22 @@ use App\Http\Controllers\Admin\BlogPostController as AdminBlogPostController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\CommunityController as AdminCommunityController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/manifest.webmanifest', function () {
+    return response(
+        file_get_contents(public_path('manifest.webmanifest')),
+        200,
+        ['Content-Type' => 'application/manifest+json'],
+    );
+})->name('manifest');
+
+Route::get('/sw.js', function () {
+    return response(
+        file_get_contents(public_path('sw.js')),
+        200,
+        ['Content-Type' => 'application/javascript'],
+    );
+})->name('service-worker');
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/learning-paths', [LearningPathController::class, 'index'])->name('learning-paths.index');
@@ -68,6 +85,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/subscription-plans/{subscriptionPlan:slug}/checkout', [SubscriptionCheckoutController::class, 'show'])->name('subscription-plans.checkout');
     Route::post('/subscription-plans/{subscriptionPlan:slug}/checkout', [SubscriptionCheckoutController::class, 'store'])->name('subscription-plans.checkout.store');
     Route::get('/subscription-orders/{subscriptionOrder}', [SubscriptionCheckoutController::class, 'showOrder'])->name('subscription-orders.show');
+    Route::post('/push-subscriptions', [PushSubscriptionController::class, 'store'])->name('push-subscriptions.store');
+    Route::delete('/push-subscriptions', [PushSubscriptionController::class, 'destroy'])->name('push-subscriptions.destroy');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

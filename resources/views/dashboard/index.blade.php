@@ -116,6 +116,18 @@
                         @endforelse
 
                         <a class="btn btn-soft mt-3" href="{{ route('notifications.index') }}">عرض كل الإشعارات</a>
+
+                        @if (config('push.enabled') && config('push.vapid.public_key'))
+                            <button
+                                class="btn btn-soft mt-2 w-100"
+                                type="button"
+                                data-push-enable
+                                data-vapid-public-key="{{ config('push.vapid.public_key') }}"
+                                data-store-url="{{ route('push-subscriptions.store') }}"
+                            >
+                                تفعيل إشعارات المتصفح
+                            </button>
+                        @endif
                     </article>
                 </div>
 

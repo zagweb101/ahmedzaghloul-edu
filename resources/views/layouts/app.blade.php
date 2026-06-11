@@ -4,6 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="theme-color" content="#b6864b">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
+        <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
+        <link rel="icon" href="{{ asset('icons/icon.svg') }}" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="{{ asset('icons/icon.svg') }}">
 
         @php
             $defaultRobots = request()->routeIs(
@@ -126,6 +132,12 @@
         @yield('content')
 
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('js/pwa.js') }}" defer></script>
+        @auth
+            @if (config('push.enabled') && config('push.vapid.public_key'))
+                <script src="{{ asset('js/push.js') }}" defer></script>
+            @endif
+        @endauth
         <script>
             (() => {
                 const storageKey = 'bayt-almoswer-theme';
