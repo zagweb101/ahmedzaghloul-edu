@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\LiveEventRegistration;
 use App\Notifications\LiveEventReminderNotification;
+use App\Notifications\LiveEventStartedNotification;
 use Illuminate\Console\Command;
 
 class SendLiveEventReminders extends Command
@@ -44,6 +45,36 @@ class SendLiveEventReminders extends Command
 
         $this->info("Sent {$sent} live event reminder(s).");
 
+        $started = 0;
+
+        $startedRegistrations = LiveEventRegistration::query()
+            ->with(['user', 'event'])
+            ->where('status', 'registered')
+            ->whereNull('started_notified_at')
+            ->whereHas('event', function ($query) {
+                $query
+                    ->where('is_published', true)
+                    ->whereNotNull('starts_at')
+                    ->where('starts_at', '<=', now())
+                    ->where('starts_at', '>=', now()->subHour());
+            })
+            ->get();
+
+        foreach ($startedRegistrations as $registration) {
+            if (! $registration->user || ! $registration->event) {
+                continue;
+            }
+
+            $registration->user->notify(new LiveEventStartedNotification($registration->event));
+            $registration->update(['started_notified_at' => now()]);
+            $started++;
+        }
+
+        if ($started > 0) {
+            $this->info("Sent {$started} live started notification(s).");
+        }
+
         return self::SUCCESS;
     }
 }
+

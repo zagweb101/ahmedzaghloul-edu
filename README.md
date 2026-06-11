@@ -120,6 +120,13 @@ php artisan schedule:work
 - خريطة الموقع: `/sitemap.xml`
 - `robots.txt` يشير إلى Sitemap
 
+## المدفوعات والاشتراكات (Phase 3)
+
+- بوابات الدفع: `manual` (افتراضي)، `demo`، `tap`، `stripe`
+- انتهاء الاشتراكات تلقائيًا + تنبيه قبل 7 أيام (`subscriptions:process`)
+- بث اللايف لمن حجز مقعدًا خلال نافذة الموعد
+- Stripe Checkout + webhook على `/payments/stripe/webhook`
+
 ## النشر (GitHub + Hostinger)
 
 راجع دليل النشر الكامل في [DEPLOYMENT.md](DEPLOYMENT.md).

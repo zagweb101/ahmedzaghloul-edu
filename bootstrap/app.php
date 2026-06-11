@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->validateCsrfTokens(except: [
             'payments/tap/webhook',
+            'payments/stripe/webhook',
         ]);
 
         $middleware->trustProxies(at: '*');

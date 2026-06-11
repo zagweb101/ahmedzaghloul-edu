@@ -80,7 +80,7 @@ class TapPaymentGateway implements PaymentGateway
         return new PaymentInitiationResult($order->fresh(), $checkoutUrl);
     }
 
-    public function handleWebhook(array $payload): ?SubscriptionOrder
+    public function handleWebhook(array $payload, ?string $signature = null, ?string $rawPayload = null): ?SubscriptionOrder
     {
         $order = $this->resolveOrder($payload);
 

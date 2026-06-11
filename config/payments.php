@@ -20,4 +20,10 @@ return [
         'source_id' => env('TAP_SOURCE_ID', 'src_all'),
     ],
 
+    'stripe' => [
+        'secret_key' => env('STRIPE_SECRET_KEY'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'api_url' => env('STRIPE_API_URL', 'https://api.stripe.com/v1'),
+    ],
+
 ];

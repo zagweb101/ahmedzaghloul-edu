@@ -11,5 +11,5 @@ interface PaymentGateway
 
     public function initiate(SubscriptionOrder $order): PaymentInitiationResult;
 
-    public function handleWebhook(array $payload): ?SubscriptionOrder;
+    public function handleWebhook(array $payload, ?string $signature = null, ?string $rawPayload = null): ?SubscriptionOrder;
 }

@@ -17,7 +17,7 @@ class ManualPaymentGateway implements PaymentGateway
         return new PaymentInitiationResult($order);
     }
 
-    public function handleWebhook(array $payload): ?SubscriptionOrder
+    public function handleWebhook(array $payload, ?string $signature = null, ?string $rawPayload = null): ?SubscriptionOrder
     {
         return null;
     }

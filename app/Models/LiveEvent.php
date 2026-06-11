@@ -65,6 +65,18 @@ class LiveEvent extends Model
             : ($fallback ?: 'لايف تعليمي أو فعالية من بيت المصور مع أحمد زغلول.');
     }
 
+    public function streamWindowIsOpen(): bool
+    {
+        if (! $this->stream_url || ! $this->starts_at) {
+            return false;
+        }
+
+        $opensAt = $this->starts_at->copy()->subMinutes(15);
+        $closesAt = $this->ends_at ?? $this->starts_at->copy()->addHours(4);
+
+        return now()->between($opensAt, $closesAt);
+    }
+
     public function hasAvailableSeats(): bool
     {
         return $this->capacity === null

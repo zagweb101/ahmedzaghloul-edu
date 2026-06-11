@@ -37,6 +37,8 @@ Route::get('/blog/{blogPost:slug}', [BlogPostController::class, 'show'])->name('
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 Route::post('/payments/tap/webhook', [PaymentCallbackController::class, 'tapWebhook'])->name('payments.tap.webhook');
 Route::get('/payments/tap/return', [PaymentCallbackController::class, 'tapReturn'])->name('payments.tap.return');
+Route::post('/payments/stripe/webhook', [PaymentCallbackController::class, 'stripeWebhook'])->name('payments.stripe.webhook');
+Route::get('/payments/stripe/return', [PaymentCallbackController::class, 'stripeReturn'])->name('payments.stripe.return');
 Route::get('/community', [CommunityController::class, 'index'])->name('community.index');
 Route::get('/community/gallery', [CommunityController::class, 'gallery'])->name('community.gallery');
 

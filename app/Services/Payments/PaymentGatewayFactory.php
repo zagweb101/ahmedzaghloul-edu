@@ -14,6 +14,7 @@ class PaymentGatewayFactory
         return match ($driver) {
             'manual' => new ManualPaymentGateway,
             'tap' => new TapPaymentGateway,
+            'stripe' => new StripePaymentGateway,
             default => throw new InvalidArgumentException("بوابة الدفع [{$driver}] غير مدعومة."),
         };
     }

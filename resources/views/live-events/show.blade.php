@@ -53,6 +53,25 @@
                     <h1 class="display-6 fw-bold mb-4">{{ $event->title }}</h1>
                     <p class="lead text-muted-soft">{{ $event->description }}</p>
 
+                    @php
+                        $canWatchStream = auth()->check()
+                            && ($event->registered_by_current_user ?? false)
+                            && $event->stream_url
+                            && $event->streamWindowIsOpen();
+                    @endphp
+
+                    @if ($canWatchStream)
+                        <div class="lesson-player surface-card mb-4">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="{{ $event->stream_url }}" title="{{ $event->title }}" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    @elseif ($event->stream_url && auth()->check() && ($event->registered_by_current_user ?? false))
+                        <div class="alert alert-info">
+                            رابط البث سيظهر قبل موعد اللايف بـ 15 دقيقة.
+                        </div>
+                    @endif
+
                     <div class="row g-3 my-4">
                         <div class="col-md-6">
                             <div class="bg-body border rounded-3 p-3">

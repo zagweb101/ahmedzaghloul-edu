@@ -25,6 +25,8 @@ return [
 
     'live_event_reminder_hours' => (int) env('LIVE_EVENT_REMINDER_HOURS', 24),
 
+    'subscription_expiring_days' => (int) env('SUBSCRIPTION_EXPIRING_DAYS', 7),
+
     /*
     |--------------------------------------------------------------------------
     | Automated Backups

@@ -18,6 +18,7 @@ class UserSubscription extends Model
         'status',
         'starts_at',
         'ends_at',
+        'expiring_notified_at',
     ];
 
     protected function casts(): array
@@ -26,6 +27,7 @@ class UserSubscription extends Model
             'access_level' => AccessLevel::class,
             'starts_at' => 'datetime',
             'ends_at' => 'datetime',
+            'expiring_notified_at' => 'datetime',
         ];
     }
 

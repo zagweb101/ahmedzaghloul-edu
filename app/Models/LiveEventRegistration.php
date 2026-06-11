@@ -15,12 +15,14 @@ class LiveEventRegistration extends Model
         'user_id',
         'status',
         'reminder_sent_at',
+        'started_notified_at',
     ];
 
     protected function casts(): array
     {
         return [
             'reminder_sent_at' => 'datetime',
+            'started_notified_at' => 'datetime',
         ];
     }
 
