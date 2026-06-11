@@ -43,7 +43,7 @@
             <div class="hero-cinematic__media" aria-hidden="true">
                 <img
                     src="{{ asset($brandImages['hero']) }}"
-                    alt=""
+                    alt="أكاديمية بيت المصور — استوديو تعليم التصوير مع أحمد زغلول"
                     loading="eager"
                     decoding="async"
                 >

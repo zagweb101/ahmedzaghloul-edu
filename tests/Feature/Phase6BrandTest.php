@@ -20,8 +20,9 @@ class Phase6BrandTest extends TestCase
             ->assertSee('بيت لكل مصور')
             ->assertSee('تعلّم · ألهم · أبدع')
             ->assertSee('شهادات الأعضاء')
-            ->assertSee('logo-horizontal.png', false)
-            ->assertSee('promo-journey.png', false)
+            ->assertSee('logo-mark.svg', false)
+            ->assertSee('BAYT ALMOSWER')
+            ->assertSee('promo-camera-hero.png', false)
             ->assertSee(config('testimonials.items.0.name'));
     }
 }
