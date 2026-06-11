@@ -237,6 +237,53 @@ hPanel → **Cron Jobs** → **Custom**:
 
 ---
 
+## 6ب) المحتوى وما قبل الإطلاق التجاري (Phase 6)
+
+### نشر المرحلة 4+ وملء المحتوى
+
+```bash
+cd ~/ahmedzaghloul-edu
+git pull origin main
+./deploy/post-deploy.sh
+./deploy/seed-production-content.sh
+```
+
+`seed-production-content.sh` يضيف مقالات المدونة وSEO للخطط و`stream_url` للايف (آمن — `updateOrCreate` فقط).
+
+**يدوياً من الإدارة:**
+- صور خطط الاشتراك: `/admin/subscription-plans` → تحرير SEO → رفع صورة
+- رابط بث حقيقي: `/admin/live-events` → تعديل اللايف → `stream_url` (YouTube embed)
+
+### فحص الجاهزية التجارية
+
+```bash
+/opt/alt/php83/usr/bin/php artisan platform:prelaunch-check
+```
+
+### تأمين الإنتاج قبل الإطلاق
+
+```bash
+# 1) أنشئ حساب مدير حقيقي من /register ثم اجعله admin من DB أو استخدم الموجود
+# 2) غيّر كلمة المرور
+/opt/alt/php83/usr/bin/php artisan platform:rotate-admin-password owner@baytalmosawer.net
+
+# 3) احذف حسابات التجربة
+/opt/alt/php83/usr/bin/php artisan platform:remove-seed-users --force
+```
+
+### إعدادات `.env` قبل الإطلاق
+
+```env
+NOTIFY_VIA_MAIL=true
+MAIL_USERNAME=...
+MAIL_PASSWORD=...
+MAIL_FROM_ADDRESS=...
+PAYMENT_IBAN=SA...
+GA4_MEASUREMENT_ID=G-...
+```
+
+---
+
 ## 7) التحقق بعد النشر
 
 - [ ] الصفحة الرئيسية تفتح عبر HTTPS بدون أخطاء

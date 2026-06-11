@@ -39,4 +39,15 @@ return [
 
     'backup_retention_days' => (int) env('BACKUP_RETENTION_DAYS', 14),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Seed Accounts (remove before commercial launch)
+    |--------------------------------------------------------------------------
+    */
+
+    'seed_user_emails' => [
+        'admin@example.com',
+        'test@example.com',
+    ],
+
 ];

@@ -34,4 +34,8 @@ $PHP_BIN artisan view:cache
 echo "==> Production health check"
 $PHP_BIN artisan platform:health-check
 
+echo "==> Pre-launch advisory check (non-blocking)"
+$PHP_BIN artisan platform:prelaunch-check || true
+
 echo "==> Done. Verify: $PHP_BIN artisan schedule:list"
+echo "    Optional content: ./deploy/seed-production-content.sh"

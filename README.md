@@ -134,6 +134,13 @@ php artisan schedule:work
 - توليد مفاتيح VAPID: `php artisan push:generate-vapid`
 - تفعيل الإشعارات من لوحة العضو
 
+## ما قبل الإطلاق التجاري (Phase 6)
+
+- `php artisan platform:prelaunch-check` — فحص البريد والبنك وGA4 وحسابات seed
+- `php artisan platform:rotate-admin-password owner@site.com` — تغيير كلمة مرور المدير
+- `php artisan platform:remove-seed-users --force` — حذف حسابات التجربة
+- `./deploy/seed-production-content.sh` — مقالات SEO + بيانات اللايف (آمن للإنتاج)
+
 ## النشر (GitHub + Hostinger)
 
 راجع دليل النشر الكامل في [DEPLOYMENT.md](DEPLOYMENT.md).
