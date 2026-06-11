@@ -51,6 +51,7 @@ body {
     color: var(--bm-text);
     font-family: "Tajawal", "Segoe UI", Tahoma, sans-serif;
     line-height: 1.7;
+    overflow-x: clip;
 }
 
 a {
@@ -136,22 +137,30 @@ a {
 
 .hero-cinematic {
     position: relative;
-    min-height: min(92svh, 920px);
+    width: 100vw;
+    max-width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    min-height: max(78svh, 640px);
     display: flex;
     align-items: center;
     overflow: hidden;
+    isolation: isolate;
 }
 
 .hero-cinematic__media {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .hero-cinematic__media img {
+    display: block;
     width: 100%;
+    min-width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 62% center;
+    object-position: 58% center;
 }
 
 .hero-cinematic__overlay {
@@ -165,6 +174,7 @@ a {
 .hero-cinematic__content {
     position: relative;
     z-index: 1;
+    width: 100%;
     padding-block: clamp(4rem, 10vw, 7rem);
 }
 

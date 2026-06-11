@@ -50,8 +50,9 @@
             </div>
             <div class="hero-cinematic__overlay" aria-hidden="true"></div>
 
-            <div class="container hero-cinematic__content">
-                <div class="col-lg-7">
+            <div class="container-fluid hero-cinematic__content px-3 px-sm-4 px-xl-5">
+                <div class="row justify-content-start">
+                    <div class="col-lg-7 col-xl-6">
                     <p class="hero-eyebrow mb-3">{{ config('brand.tagline') }}</p>
                     <p class="brand-motto mb-4">{{ config('brand.motto') }}</p>
                     <h1 class="hero-title mb-4">
@@ -92,6 +93,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </section>
