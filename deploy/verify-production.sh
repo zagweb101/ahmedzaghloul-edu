@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")/.."
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR/.."
+# shellcheck source=deploy/common.sh
+source "$SCRIPT_DIR/common.sh"
 
+echo "==> PHP binary: $PHP_BIN"
+echo "==> PHP version: $($PHP_BIN -r 'echo PHP_VERSION;')"
+
+echo ""
 echo "==> Environment"
-php artisan about --only=environment 2>/dev/null || php artisan env
+$PHP_BIN artisan about --only=environment 2>/dev/null || $PHP_BIN artisan env
+
+echo ""
+echo "==> Platform health check"
+$PHP_BIN artisan platform:health-check
 
 echo ""
 echo "==> Storage link"
@@ -26,8 +37,12 @@ done
 
 echo ""
 echo "==> Scheduled tasks"
-php artisan schedule:list
+$PHP_BIN artisan schedule:list
+
+echo ""
+echo "==> Recent log errors (7 days)"
+$PHP_BIN artisan platform:log-review
 
 echo ""
 echo "==> Database connection"
-php artisan db:show 2>/dev/null || php artisan migrate:status
+$PHP_BIN artisan db:show 2>/dev/null || $PHP_BIN artisan migrate:status

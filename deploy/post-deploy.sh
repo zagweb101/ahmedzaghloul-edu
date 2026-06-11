@@ -1,18 +1,37 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR/.."
+# shellcheck source=deploy/common.sh
+source "$SCRIPT_DIR/common.sh"
+
+echo "==> Using PHP: $PHP_BIN ($($PHP_BIN -r 'echo PHP_VERSION;'))"
+
 echo "==> Installing production dependencies"
-composer install --no-dev --optimize-autoloader --no-interaction
+if [ -f composer.phar ]; then
+    $PHP_BIN composer.phar install --no-dev --optimize-autoloader --no-interaction
+elif command -v composer2 >/dev/null 2>&1; then
+    $PHP_BIN "$(command -v composer2)" install --no-dev --optimize-autoloader --no-interaction
+elif command -v composer >/dev/null 2>&1; then
+    $PHP_BIN "$(command -v composer)" install --no-dev --optimize-autoloader --no-interaction
+else
+    echo "Composer not found"
+    exit 1
+fi
 
 echo "==> Running migrations"
-php artisan migrate --force
+$PHP_BIN artisan migrate --force
 
 echo "==> Linking public storage"
-php artisan storage:link --force 2>/dev/null || php artisan storage:link
+$PHP_BIN artisan storage:link --force 2>/dev/null || $PHP_BIN artisan storage:link
 
 echo "==> Caching configuration"
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+$PHP_BIN artisan config:cache
+$PHP_BIN artisan route:cache
+$PHP_BIN artisan view:cache
 
-echo "==> Done. Verify: php artisan schedule:list"
+echo "==> Production health check"
+$PHP_BIN artisan platform:health-check
+
+echo "==> Done. Verify: $PHP_BIN artisan schedule:list"

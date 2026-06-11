@@ -25,4 +25,16 @@ return [
 
     'live_event_reminder_hours' => (int) env('LIVE_EVENT_REMINDER_HOURS', 24),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Automated Backups
+    |--------------------------------------------------------------------------
+    */
+
+    'backup_disk' => env('BACKUP_DISK', 'local'),
+
+    'backup_path' => env('BACKUP_PATH', 'backups'),
+
+    'backup_retention_days' => (int) env('BACKUP_RETENTION_DAYS', 14),
+
 ];

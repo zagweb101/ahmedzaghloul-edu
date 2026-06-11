@@ -119,6 +119,18 @@ php artisan schedule:work
 
 راجع دليل النشر الكامل في [DEPLOYMENT.md](DEPLOYMENT.md).
 
+### البنية التحتية (المرحلة 1)
+
+```bash
+./deploy/post-deploy.sh          # يستخدم PHP 8.3 تلقائيًا على Hostinger
+./deploy/verify-production.sh
+php artisan platform:health-check
+php artisan platform:backup
+php artisan platform:log-review
+```
+
+النسخ الاحتياطية: `storage/app/backups/` — مجدولة يوميًا عبر Cron + `schedule:run`.
+
 ## الاختبارات
 
 ```bash

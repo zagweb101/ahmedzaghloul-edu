@@ -186,21 +186,54 @@ chmod -R 775 storage bootstrap/cache
 
 ---
 
-## 6) Cron Job (مهم للتذكيرات)
+## 6) Cron Jobs
 
-hPanel → **Cron Jobs** → أضف:
+### أ) جدولة Laravel (مطلوب)
 
-```bash
-* * * * * cd /home/USER/ahmedzaghloul-edu && php artisan schedule:run >> /dev/null 2>&1
-```
-
-يُشغّل تذكيرات اللايفات كل ساعة تلقائيًا.
-
-تحقق:
+hPanel → **Cron Jobs** → **Custom**:
 
 ```bash
-php artisan schedule:list
+* * * * * cd /home/u166250023/ahmedzaghloul-edu && /opt/alt/php83/usr/bin/php artisan schedule:run >> /dev/null 2>&1
 ```
+
+يشغّل تلقائيًا:
+- تذكيرات اللايفات (كل ساعة)
+- نسخ احتياطي لقاعدة البيانات والملفات (يوميًا 02:00)
+- مراجعة سجلات الأخطاء (يوميًا 06:00)
+- فحص صحة الإنتاج (أسبوعيًا)
+
+### ب) نشر تلقائي من GitHub (اختياري)
+
+أضف Secrets في GitHub → Repository → Settings → Secrets:
+
+| Secret | القيمة |
+|--------|--------|
+| `DEPLOY_HOST` | IP السيرفر |
+| `DEPLOY_USER` | `u166250023` |
+| `DEPLOY_PORT` | `65002` |
+| `DEPLOY_SSH_KEY` | المفتاح الخاص لـ SSH |
+
+بعدها workflow `deploy-production.yml` ينشر تلقائيًا بعد نجاح الاختبارات على `main`.
+
+**بديل على السيرفر** (بدون GitHub Secrets):
+
+```bash
+# كل 10 دقائق يتحقق من تحديثات GitHub
+*/10 * * * * cd /home/u166250023/ahmedzaghloul-edu && ./deploy/server-auto-pull.sh >> storage/logs/deploy.log 2>&1
+```
+
+### ج) أوامر البنية التحتية (المرحلة 1)
+
+```bash
+/opt/alt/php83/usr/bin/php artisan platform:health-check
+/opt/alt/php83/usr/bin/php artisan platform:backup
+/opt/alt/php83/usr/bin/php artisan platform:log-review
+/opt/alt/php83/usr/bin/php artisan schedule:list
+```
+
+النسخ الاحتياطية تُحفظ في: `storage/app/backups/`
+
+مرجع `.env` للإنتاج: `deploy/env.production.example`
 
 ---
 

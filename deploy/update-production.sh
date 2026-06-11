@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")/.."
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR/.."
+# shellcheck source=deploy/common.sh
+source "$SCRIPT_DIR/common.sh"
 
 echo "==> Pulling latest changes"
 git pull origin main
