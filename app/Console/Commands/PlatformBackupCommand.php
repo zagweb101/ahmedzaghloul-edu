@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\BackupService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 class PlatformBackupCommand extends Command
 {
@@ -41,8 +42,10 @@ class PlatformBackupCommand extends Command
 
         $deleted = $backups->pruneOldBackups();
 
+        $disk = Storage::disk(config('platform.backup_disk', 'backups'));
+
         foreach ($created as $path) {
-            $this->line(" - {$path}");
+            $this->line(' - ' . $disk->path($path));
         }
 
         if ($deleted > 0) {

@@ -149,6 +149,8 @@ class BackupService
         $path = trim((string) config('platform.backup_path', ''), '/');
         $destination = $path !== '' ? "{$path}/{$destinationName}" : $destinationName;
 
+        File::ensureDirectoryExists($disk->path($path !== '' ? $path : '.'));
+
         $disk->put($destination, file_get_contents($sourcePath));
         File::delete($sourcePath);
 

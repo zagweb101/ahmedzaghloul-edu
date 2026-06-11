@@ -33,7 +33,7 @@ return [
 
     'backup_disk' => env('BACKUP_DISK', 'backups'),
 
-    'backup_path' => env('BACKUP_PATH', 'backups'),
+    'backup_path' => env('BACKUP_PATH', ''),
 
     'backup_retention_days' => (int) env('BACKUP_RETENTION_DAYS', 14),
 
